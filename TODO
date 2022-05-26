@@ -1,0 +1,4 @@
+* ability to set certificate file in any time
+	command "setcert" to be implemented
+	with the assumption that servers often closes TCP connection after closing SSL connection
+		the necessity is questionable
