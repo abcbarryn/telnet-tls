@@ -1,0 +1,8 @@
+This network tools are written by the OpenBSD team. They where
+ported to Linux by Thorsten Kukuk <kukuk@suse.de>
+
+TLS support added by Roman Rybalko <roman_rybalko@users.sf.net>
+Auto starttls added in version 0.3.3 by Barry Nelson <barry.nelson@amobiledevice.com>.
+Default protocol is now telnets (telnet over ssl/tls) unless invokoked as telnet instead of telnet-tls. Changed by by Barry Nelson <barry.nelson@amobiledevice.com>.
+Ediited to compile on Mac OS X by by Barry Nelson <barry.nelson@amobiledevice.com>.
+Version updated to 0.3.3 by by Barry Nelson <barry.nelson@amobiledevice.com>.
