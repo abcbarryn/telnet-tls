@@ -357,7 +357,9 @@ int print_ssl_conn_info()
 			BIO_number_written(SSL_get_wbio(ssl_conn)));
 
 #ifndef __APPLE__
+#ifndef __CYGWIN__
 	printf(((ssl_conn->hit)?"---\r\nReused, ":"---\r\nNew, "));
+#endif
 #endif
 	c=SSL_get_current_cipher(ssl_conn);
 	printf("%s, Cipher is %s\r\n",
