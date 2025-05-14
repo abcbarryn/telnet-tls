@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Package Compressed="yes" Id="BarryN.TelnetTLS" Name="TelnetTLS"
+           Manufacturer="Barry Nelson" Version="1.0.0">
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="icon.ico" SourceFile="TelnetTLS.ICO"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+    <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="TelnetTLS">
+          <Component Id="MainProgram">
+    	    <File Id="TelnetTLS.exe" Source="Telnet-TLS.exe" />
+            <Environment Id="SET_ENV"
+                         Action="set"
+                         Name="PATH"
+                         Part="last"       
+                         Permanent="no" 
+                         System="yes" 
+                         Value="[INSTALLFOLDER]" />
+          </Component>
+          <Component Id="ManPage">
+    	    <File Id="ManPage" Source="telnet-man.txt" />
+          </Component>
+          <Component Id="MainProgram_license">
+    	    <File Source="license.txt" />
+          </Component>
+          <Component Id="Telnet">
+    	    <File Id="Telnet.exe" Source="Telnet.exe" />
+	  </Component>
+	  <Component Id="TelnetTLS_ICO">
+    	    <File Source="TelnetTLS.ICO" />
+          </Component>
+	  <Component Id="cygcrypto11">
+    	    <File Source="cygcrypto-1.1.dll" />
+          </Component>
+	  <Component Id="cygssl11">
+    	    <File Source="cygssl-1.1.dll" />
+          </Component>
+	  <Component Id="cygz">
+    	    <File Source="cygz.dll" />
+          </Component>
+	  <Component Id="cygncursesw10">
+    	    <File Source="cygncursesw-10.dll" />
+          </Component>
+	  <Component Id="cygwin1">
+    	    <File Source="cygwin1.dll" />
+          </Component>
+        </Directory>
+    </Directory>
+    <Directory Id="ProgramMenuFolder">
+    	<Directory Id="ApplicationProgramsFolder" Name="TelnetTLS"/>
+    </Directory>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+    	<Component Id="ApplicationShortcut">
+        	<Shortcut Id="ApplicationStartMenuShortcut"
+                	Name="TelnetTLS"
+                	Description="Telnet with TLS support"
+                	Target="[#TelnetTLS.exe]" />
+        	<Shortcut Id="ApplicationStartMenuShortcut2"
+                	Name="Telnet"
+                	Description="Telnet without TLS support"
+                	Target="[#Telnet.exe]" />
+        	<Shortcut Id="ManPageStartMenuShortcut"
+                	Name="Man page"
+                	Description="Help file"
+                	Target="[#ManPage]" />
+        	<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+        	<RegistryValue Root="HKCU" Key="Software\BarryN\BWBASIC" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+    	</Component>
+    </DirectoryRef>
+    <Feature Id="TelnetTLS">
+      <ComponentRef Id="MainProgram" />
+      <ComponentRef Id="ManPage" />
+      <ComponentRef Id="MainProgram_license" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="TelnetTLS_ICO" />
+      <ComponentRef Id="cygcrypto11" />
+      <ComponentRef Id="cygssl11" />
+      <ComponentRef Id="cygz" />
+      <ComponentRef Id="cygncursesw10" />
+      <ComponentRef Id="cygwin1" />
+      <ComponentRef Id="Telnet" />
+    </Feature>
+    </Package>
+</Wix>
